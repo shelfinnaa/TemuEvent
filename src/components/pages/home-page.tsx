@@ -1,8 +1,10 @@
+"use client"
 import ExploreCategories from "@/components/categories"
 import EventCard from "@/components/card"
 import CallToAction from "@/components/cta"
 import Footer from "@/components/footer"
-import Navbar from "@/components/navbar"
+import { useRouter } from 'next/navigation'
+import { HeroNavbar } from "@/components/navbar"
 
 const events = [
   {
@@ -13,6 +15,7 @@ const events = [
     subtitle: "Sign up for our classes now!",
     seatsLeft: "Only 8 Seats left.",
     image: "/embroidery.jpg",
+    productSlug: "embroidery-class",
   },
   {
     id: "2",
@@ -40,6 +43,7 @@ const events = [
     subtitle: "Sign up for our classes now!",
     seatsLeft: "Only 8 Seats left.",
     image: "/embroidery.jpg",
+    productSlug: "embroidery-class",
   },
   {
     id: "5",
@@ -62,10 +66,17 @@ const events = [
 ]
 
 export default function HomePage() {
+  const router = useRouter()
+
+  const handleWorkshopClick = (event) => {
+    // Navigate to the product page
+    router.push(`/product/${event.productSlug}`)
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <Navbar />
+      <HeroNavbar />
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center">
@@ -115,15 +126,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {events.map((event) => (
-              <EventCard
-                key={event.id}
-                title={event.title}
-                date={event.date}
-                month={event.month}
-                subtitle={event.subtitle}
-                seatsLeft={event.seatsLeft}
-                image={event.image}
-              />
+              <EventCard 
+                            key={event.id}
+                            {...event}
+                            onClick={() => handleWorkshopClick(event)}
+                          />
             ))}
           </div>
         </div>

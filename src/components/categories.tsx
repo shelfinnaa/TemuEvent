@@ -61,9 +61,6 @@ export default function ExploreCategories({ onCategoryClick }: ExploreCategories
               <span className="text-lg font-bold text-amber-800 group-hover:text-amber-700 transition-colors duration-300">
                 {category.name}
               </span>
-              <span className="text-lg font-bold text-amber-800 group-hover:text-amber-700 transition-colors duration-300">
-                {category.name}
-              </span>
             </div>
           ))}
         </div>
